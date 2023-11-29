@@ -1,0 +1,53 @@
+<html>
+<font size="8" color="green">Final test lab</font><br><br> Number of rows: <input type="text" id="t1" placeholder="Number of Rows" /><br><br> Number of columns: <input type="text" id="t2" placeholder="Number of Columns" /><br><br>
+
+<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+<button id="b2" onclick="addColumn()">Add Column</button>
+<button id="b3" onclick="addRow()">Add Row</button>
+
+<div id="table-container"></div>
+
+<script>
+    let tableContainer = document.getElementById('table-container');
+    let numRows, numCols;
+
+    function generateTable() {
+        numRows = parseInt(document.getElementById('t1').value);
+        numCols = parseInt(document.getElementById('t2').value);
+
+        let createTable = document.createElement('table');
+        for (let i = 0; i < numRows; i++) {
+            let row = createTable.insertRow(i);
+            for (let j = 0; j < numCols; j++) {
+                let cell = row.insertCell(j);
+                cell.textContent = 'R' + (i + 1) + 'C' + (j + 1);
+            }
+        }
+
+        tableContainer.innerHTML = '';
+        tableContainer.appendChild(createTable);
+    }
+
+    function addColumn() {
+        numCols++;
+        let table = document.querySelector('table');
+        for (let i = 0; i < numRows; i++) {
+            let cell = table.rows[i].insertCell(numCols - 1);
+            cell.textContent = 'R' + (i + 1) + 'C' + numCols;
+        }
+    }
+
+    function addRow() {
+        numRows++;
+        let table = document.querySelector('table');
+        let row = table.insertRow(numRows - 1);
+        for (let j = 0; j < numCols; j++) {
+            let cell = row.insertCell(j);
+            cell.textContent = 'R' + numRows + 'C' + (j + 1);
+        }
+    }
+</script>
+<!-- Comment -->
+
+</html>
